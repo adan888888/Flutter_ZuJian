@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: ""),
     );
   }
@@ -43,19 +43,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: 100,
+        cacheExtent: 10,
+        itemBuilder: (BuildContext context, int index) {
+          print('$index');
+          return Container(
+              height: 70,
+              color: Colors.blue[(index % 5) * 100],
+              child: Text('$index This formatting nicer'));
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
