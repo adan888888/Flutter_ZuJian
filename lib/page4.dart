@@ -63,15 +63,11 @@ class MyWidget extends GetView<MyControl> {
                 onRefresh: () => controller.chang(),
                 onLoad: () => controller.onLoad(),
                 child: ListView.builder(
-                  itemCount:
-                      controller.listX.isNotEmpty ? controller.listX.length : 0,
+                  itemCount: controller.listX.isNotEmpty ? controller.listX.length : 0,
                   itemBuilder: (context, index) {
                     return Container(
                       padding: const EdgeInsets.all(16),
-                      child: Column(children: [
-                        Text(controller.listX[index]),
-                        const Divider(height: 2)
-                      ]),
+                      child: Column(children: [Text(controller.listX[index]), const Divider(height: 2)]),
                     );
                   },
                 ),
@@ -85,9 +81,11 @@ class MyWidget extends GetView<MyControl> {
 }
 
 class MyControl extends GetxController {
-  late final EasyRefreshController _controller = EasyRefreshController(
-      controlFinishRefresh: true, controlFinishLoad: true);
+  late final EasyRefreshController _controller =
+      EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
+
   var listX = <String>[].obs;
+  // late RxList listX=[].obs;
 
   add() {
     listX.value.add("新增");
