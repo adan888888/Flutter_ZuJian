@@ -82,13 +82,12 @@ class ScaffoldXX1 extends StatelessWidget {
                             size: 50,
                           ),
                         ),
-                        const Positioned(
-                            top: 13, left: 20, child: Text("data_from_page2")),
+                        const Positioned(top: 13, left: 20, child: Text("data_from_page2")),
                         const Text("data_from_page1")
                       ],
                     ),
                     const SizedBox(height: 2.0),
-                    const Flexible(child: Text("这是一个Flexible")),
+
                     //AspectRatio 宽高比控件（外层的只能写一个）
                     Container(
                       alignment: Alignment.topLeft,
@@ -112,7 +111,7 @@ class ScaffoldXX1 extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          flex: 5, //占两份
+                          flex: 1, //占两份
                           child: Container(
                             color: Colors.amberAccent,
                             height: 50,
@@ -128,7 +127,80 @@ class ScaffoldXX1 extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    const Divider(),
+                    //Flexible填满主轴可用空间
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          color: Colors.indigoAccent,
+
+                          /// 此组件在主轴方向占据48.0逻辑像素,其它空间被 Flexible填满
+                          width: 48.0, height: 20,
+                        ),
+
+                        /// 此组件会填满Row在主轴方向的剩余空间，撑开Row（fit: FlexFit.tight需要加这个属性）
+                        Flexible(
+                            //或者Expand（不需要fit属性）
+                            fit: FlexFit.tight,
+                            child: Container(color: Colors.deepOrange, child: const Text("这个剩余空间被自动填满")))
+                      ],
+                    ),
+                    const Divider(),
+                    //Row中子控件两端对齐 //1.主轴设置两端对齐
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //主轴设置两端对齐
+                      children: <Widget>[
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("这是第一个方块")),
+                        Container(color: Colors.deepOrange, width: 48.0, height: 40),
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 30),
+                      ],
+                    ),
+                    //Row中子控件两端对齐 //2.Expanded填充
+                    Row(
+                      children: <Widget>[
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("这是第一个方块")),
+                        Expanded(child: SizedBox()), //会占掉剩余的空间
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 30),
+                      ],
+                    ),
+                    //Row中子控件两端对齐 //3.Spacer填充
+                    Row(
+                      children: <Widget>[
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("这是第一个方块")),
+                        Spacer(), //会占掉剩余的空间
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 30),
+                      ],
+                    ),
+                    //Row如何让文字不居中显示
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        //Expanded自动占满左则空间，
+                        Expanded(
+                          child: Container(
+                            color: Colors.amberAccent,
+                            child: Column(
+                              //左则空间占满导致了这里面的两个控件自动居中，需要包一层加上width: double.infinity属性，占满父空间
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  child: Text("这是第一个方块"),
+                                  color: Colors.blue,
+                                ),
+                                Text("名字"),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset(
+                          'assets/images/banner-bg.jpg',
+                          width: 60,
+                          fit: BoxFit.cover,
+                        )
+                      ],
+                    ),
                   ],
                 ),
         );

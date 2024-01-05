@@ -80,16 +80,23 @@ class MyWidget extends GetView<MyControl> {
   }
 }
 
-class MyControl extends GetxController {
+class MyControl extends GetxController with StateMixin{
   late final EasyRefreshController _controller =
       EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
 
   var listX = <String>[].obs;
   // late RxList listX=[].obs;
+ var map= Map();
+
 
   add() {
     listX.value.add("新增");
     listX.refresh();
+
+    map['name']="zdfdflj";
+    map['age']="12";
+
+    print(map);
   }
 
   Future<dynamic> chang() async {
