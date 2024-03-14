@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 void main() {
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -42,16 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: null,
+      appBar: AppBar(
+        title: Text('列表'),
+        backgroundColor: Colors.transparent,
+      ),
       body: ListView.builder(
         itemCount: 100,
         cacheExtent: 10,
         itemBuilder: (BuildContext context, int index) {
           print('$index');
-          return Container(
-              height: 70,
-              color: Colors.blue[(index % 5) * 100],
-              child: Text('$index This formatting nicer'));
+          return Center(child: FittedBox(child: Text('$index This formatting nicer')),);
         },
       ),
       floatingActionButton: FloatingActionButton(

@@ -183,6 +183,7 @@ class ScaffoldXX1 extends StatelessWidget {
                             child: Column(
                               //左则空间占满导致了这里面的两个控件自动居中，需要包一层加上width: double.infinity属性，占满父空间
                               children: [
+                                //文字不居中显示
                                 Container(
                                   width: double.infinity,
                                   child: Text("这是第一个方块"),
@@ -201,6 +202,8 @@ class ScaffoldXX1 extends StatelessWidget {
                         )
                       ],
                     ),
+                    const Divider(),
+
                   ],
                 ),
         );
