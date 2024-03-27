@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart' as MyDio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart ' as MyDio;
-
 main() {
   runApp(const GetMaterialApp(home: Home()));
 }

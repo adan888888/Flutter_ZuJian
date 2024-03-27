@@ -53,18 +53,18 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
+      sha256: "49af28382aefc53562459104f64d16b9dfd1e8ef68c862d5af436cc8356ce5a8"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.3"
+    version: "5.4.1"
   easy_refresh:
     dependency: "direct main"
     description:
       name: easy_refresh
-      sha256: a889b9920acfdf00bf20a531067ccf465e30e084d7179d62777a0a4a811a5dee
+      sha256: f36324c7f50291f85085bd64b39abe6b63909481bfa527f9c654d17ef172de30
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.2+2"
+    version: "3.3.4"
   fake_async:
     dependency: transitive
     description:
@@ -99,6 +99,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.6"
+  getwidget:
+    dependency: "direct main"
+    description:
+      name: getwidget
+      sha256: "91df14a8d80e21f3ec02759295b90cc8badb8a872b90d34ad4aeb4085d833b5c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   http_parser:
     dependency: transitive
     description:
