@@ -47,9 +47,7 @@ class ScaffoldXX1 extends StatelessWidget {
                     color: Colors.red,
                   ),
                 )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              : ListView(
                   children: [
                     Container(
                       height: 60,
@@ -90,11 +88,10 @@ class ScaffoldXX1 extends StatelessWidget {
 
                     //AspectRatio 宽高比控件（外层的只能写一个）
                     Container(
-                      alignment: Alignment.topLeft,
                       color: Colors.red,
-                      width: 70,
+                      width: 100,
                       child: const AspectRatio(
-                        aspectRatio: 1 / 0.8,
+                        aspectRatio: 1 / 0.5,
                         child: Icon(Icons.ad_units),
                       ),
                     ),
@@ -114,7 +111,8 @@ class ScaffoldXX1 extends StatelessWidget {
                           flex: 1, //占两份
                           child: Container(
                             color: Colors.amberAccent,
-                            height: 50,
+                            height: 20,
+                            /*不设置交叉轴，默认剧中*/
                             child: const Text("这是一个Expanded"),
                           ),
                         ),
@@ -159,8 +157,8 @@ class ScaffoldXX1 extends StatelessWidget {
                     //Row中子控件两端对齐 //2.Expanded填充
                     Row(
                       children: <Widget>[
-                        Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("这是第一个方块")),
-                        Expanded(child: SizedBox()), //会占掉剩余的空间
+                        Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("Expanded演示")),
+                        const Expanded(child: SizedBox()), //会占掉剩余的空间(高度没有设置默认是0，只是把宽度拉申占满了)
                         Container(color: Colors.indigoAccent, width: 48.0, height: 30),
                       ],
                     ),
@@ -168,7 +166,7 @@ class ScaffoldXX1 extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Container(color: Colors.indigoAccent, width: 48.0, height: 40, child: const Text("这是第一个方块")),
-                        Spacer(), //会占掉剩余的空间
+                        const Spacer(), //会占掉剩余的空间
                         Container(color: Colors.indigoAccent, width: 48.0, height: 30),
                       ],
                     ),
@@ -181,14 +179,11 @@ class ScaffoldXX1 extends StatelessWidget {
                           child: Container(
                             color: Colors.amberAccent,
                             child: Column(
-                              //左则空间占满导致了这里面的两个控件自动居中，需要包一层加上width: double.infinity属性，占满父空间
+                              //Column交叉自动居中的，需要包一层加上width: double.infinity属性，占满父空间
                               children: [
-                                Container(
-                                  width: double.infinity,
-                                  child: Text("这是第一个方块"),
-                                  color: Colors.blue,
-                                ),
-                                Text("名字"),
+                                //文字不居中显示
+                                Container(width: double.infinity, child: const Text("这是第一个方块"), color: Colors.blue),
+                                const Text("名字名字名字名字"),
                               ],
                             ),
                           ),
@@ -201,6 +196,13 @@ class ScaffoldXX1 extends StatelessWidget {
                         )
                       ],
                     ),
+                    const Divider(),
+                    Row(
+                      children: [
+                        Container(color: Colors.yellowAccent, width: 200, height: 200, child: const FlutterLogo()),
+                      ],
+                    ),
+
                   ],
                 ),
         );
