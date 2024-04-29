@@ -46,13 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.redAccent, title: Text(widget.title)),
       body: Center(
-          child: Box(
-        key: _globalKey,
-        color: Colors.red,
-      )),
+        child: Box(
+          key: _globalKey,
+          color: Colors.red,
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //1.获取currentState Widget 的属性，方法
+          //1.获取currentState 子Widget 的属性，方法
           var currentState = _globalKey.currentState as _BoxState;
           setState(() {
             currentState._counter++; //改变子控件的属性，还可以拿到方法...
