@@ -53,7 +53,7 @@ void main() {
   print(aaa1 == aaa2);
   BB bb1 = BB();
   BB bb2 = BB();
-  print(BB._() == BB._());
+  print(BB._() == BB._());//这里还是能访问的到，是因为是在一个文件里
   print(bb1 == bb2);
 }
 
@@ -89,12 +89,21 @@ class BB {
   /// 单例对象
   static BB? _socket;
 
-  /// 内部构造方法，可避免外部暴露构造函数，进行实例化
+  /// _下划线私有构造方法，防止外部直接调用
   BB._();
-  /// 获取单例内部方法
-  factory BB() {
+
+  /// 获取单例内部方法 ，只有工厂构造方法才有return返回值
+  /* factory BB() {
     // 只能有一个实例
     _socket ??= BB._();
     return _socket!;
-  }
+  }*/
+
+  //简化写法
+  /* factory BB() {
+    return _socket ??= BB._();
+  }*/
+
+  // 再简化
+  factory BB() => _socket ??= BB._();
 }
