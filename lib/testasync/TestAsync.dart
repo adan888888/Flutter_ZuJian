@@ -28,6 +28,7 @@ class MyHomePage extends StatefulWidget {
   State<StatefulWidget> createState() => _MyHomePageState();
 }
 
+///异步
 class _MyHomePageState extends State<MyHomePage> {
   int _count = 0;
 

@@ -48,13 +48,43 @@ void main() {
   print(aa.s);
 
   print("---------------------------对象比较..单例----------------------------------------");
-  AA aaa1 = AA();
+  AA? aaa1 = AA();
   AA aaa2 = AA();
   print(aaa1 == aaa2);
   BB bb1 = BB();
   BB bb2 = BB();
-  print(BB._() == BB._());//这里还是能访问的到，是因为是在一个文件里
+  print(BB._() == BB._()); //这里还是能访问的到，是因为是在一个文件里
   print(bb1 == bb2);
+
+  print("---------------------------?问号的使用  ?  ??  !   ??=----------------------------------------");
+  aaa1 = null;
+  print(aaa1?.s?.length); //单问号.是非空判断，如果aaa1为空，就返回null,不会往下执行
+
+  String? s;
+  print(s ?? "cccc"); //如果s为空，就返回"cccc"，不为空则返回 他自己（就像一个默认值一样，为空给一个默认值）
+
+  aaa1 ??= AA(); //两个问号= 如果aaa1是空，则将AA()值赋给aaa1。 如果不为空，则返回aaa1
+  print(aaa1);
+
+  List<String>? ls = ["1", "2", "3"];
+  print(ls.map((e) => "AA$e").toList());
+  ls = null;
+  print('${ls?.length}'); //!空检查操作符，会抛出异常
+  print('${ls?.isNotEmpty}');
+  // print('${ls!.length}'); //!空检查操作符，会抛出异常
+
+  print("--- 数组----");
+  AAA? aaa3 = AAA("", "", [AAA("", null, [])]);
+  var v1 = aaa3.list?[0].bb; //这里必须要加?
+
+  String? title = "dummy";
+  String newTitle = title!; //承诺title不为空
+  print(newTitle);
+
+  print("---------------------------late----------------------------------------");
+  late String ttilex; //late 声明变量，告诉编译器，在使用前一定会初始化
+  ttilex = "dummy";
+  print(title);
 }
 
 f1(String a) {
@@ -106,4 +136,12 @@ class BB {
 
   // 再简化
   factory BB() => _socket ??= BB._();
+}
+
+class AAA {
+  String aa = "";
+  String? bb;
+  List<AAA>? list;
+
+  AAA(this.aa, this.bb, this.list);
 }

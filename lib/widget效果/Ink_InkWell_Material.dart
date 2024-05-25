@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 main() {
   runApp(const MyApp());
@@ -49,6 +50,17 @@ class MyState extends State<MyHomePage> {
               style: ButtonStyle(
                 ///按钮颜色
                 backgroundColor: const MaterialStatePropertyAll<Color>(Colors.red),
+                ///按键大小设置
+                minimumSize: MaterialStateProperty.all(Size(Size.zero.width,27)),
+                ///圆角大小
+                // shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                //   RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(10.0), // 设置圆角大小
+                //   ),
+                // ),
+
+                ///圆形
+                shape: MaterialStateProperty.all(CircleBorder(side: BorderSide(width: 10,color: Colors.transparent))),
 
                 ///按钮字体颜色
                 foregroundColor: MaterialStateProperty.resolveWith<Color?>(
@@ -76,8 +88,9 @@ class MyState extends State<MyHomePage> {
                 color: Colors.purple,
                 elevation: 4, //影子
                 shape: const StadiumBorder(),
-                child: InkWell(//InkWell的作用就是可能找到上级Material实现水波效果
-                  customBorder: const StadiumBorder(),//水波纹的时候全圆角不要绘制出来
+                child: InkWell(
+                  //InkWell的作用就是可能找到上级Material实现水波效果
+                  customBorder: const StadiumBorder(), //水波纹的时候全圆角不要绘制出来
                   onTap: () => setState(() => _big = !_big),
                   child: Center(
                     child: _big ? const Text("Ready!") : const Icon(Icons.arrow_forward_rounded),
@@ -85,7 +98,6 @@ class MyState extends State<MyHomePage> {
                 ),
               ),
             ),
-            
           ],
         ),
       ),

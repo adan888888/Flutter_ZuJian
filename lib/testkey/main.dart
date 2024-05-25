@@ -55,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           //1.获取currentState 子Widget 的属性，方法
           var currentState = _globalKey.currentState as _BoxState;
+          ///调方法
+          // currentState.add();
           setState(() {
             currentState._counter++; //改变子控件的属性，还可以拿到方法...
           });
@@ -83,7 +85,11 @@ class Box extends StatefulWidget {
 
 class _BoxState extends State<Box> {
   int _counter = 0;
-
+  add(){
+    setState(() {
+      _counter++;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

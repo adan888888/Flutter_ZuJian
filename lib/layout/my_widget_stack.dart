@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 main() {
@@ -17,7 +18,7 @@ class MyWidget extends StatelessWidget {
         body: Center(
           child: Container(
             color: Colors.green[200],
-            constraints: const BoxConstraints(
+            constraints: const BoxConstraints( ///constraints更改了container的约束
               maxHeight: 200,
               maxWidth: 200,
               minHeight: 20,
@@ -25,7 +26,7 @@ class MyWidget extends StatelessWidget {
             ),
             child: Stack(
               fit: StackFit.passthrough,
-              alignment: Alignment(-1, 0.75),
+              alignment: Alignment(-1, 0.75),///Alignment.topRight   Alignment(0, 0)是中心对齐   默认是左上
               children: [
                 const Positioned(top: 0, left: 0, child: FlutterLogo(size: 50)),
                 Container(width: 300, height: 300, color: Colors.lightBlue),
