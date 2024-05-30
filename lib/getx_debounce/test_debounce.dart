@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-///动画AnimatedContainer的使用
+import 'package:get/get.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,31 +29,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var x = true;
+  var count = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          setState(() {
-            x = !x;
-          });
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('测试 防快点'),
+        // backgroundColor: Colors.transparent,
+      ),
+      body: Center(
+        child: Obx(() => Text("${count.value}", style: const TextStyle(fontSize: 70))),
+      ),
+      floatingActionButton: FloatingActionButton.large(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          debounce(
+            ///这里必须传obs类型
+            count,
+            ///这里的类型就是obs的value类型
+            (a) {
+              print('$count');
+              count++;
+            },
+            time: const Duration(milliseconds: 5000),
+          );
         },
-        child: Center(
-          child: AnimatedContainer(
-            width: x ? 100 : 200,
-            height: x ? 100 : 200,
-            duration: const Duration(seconds: 3),
-            onEnd: () => print('动画结束'),
-            curve: Curves.linear,
-            color: x ? Colors.yellow : Colors.lightBlue,
-            child: AnimatedSwitcher(
-              duration: const Duration(seconds: 3),
-              child: x ? const Center(child: FlutterLogo(size: 90)) : const Text("Love You",style: TextStyle(fontSize: 50),),
-            ),
-          ),
-        ),
       ),
     );
   }

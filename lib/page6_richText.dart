@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
+
 void main() {
   runApp(const Myapp());
 }
@@ -71,7 +72,9 @@ class MyRichText extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              FittedBox(fit: BoxFit.contain,child: Text('Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....')),
+              FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text('Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....Flutter中国....')),
             ],
           ),
         ),
@@ -79,8 +82,11 @@ class MyRichText extends StatelessWidget {
         Column(
           children: [
             wContainer(BoxFit.none),
+            Divider(),
             Text('Wendux'),
+            Divider(),
             wContainer(BoxFit.contain),
+            Divider(),
             wContainer1(BoxFit.none),
           ],
         ),
@@ -92,7 +98,7 @@ class MyRichText extends StatelessWidget {
 
 Widget wContainer(BoxFit boxFit) {
   return Container(
-    width: 50,
+    width: 100,
     height: 50,
     color: Colors.red,
     child: FittedBox(
@@ -105,8 +111,8 @@ Widget wContainer(BoxFit boxFit) {
 }
 
 Widget wContainer1(BoxFit boxFit) {
+  /// 将超出子组件布局范围的绘制内容剪裁掉
   return ClipRect(
-    /// 将超出子组件布局范围的绘制内容剪裁掉
     child: Container(
       width: 50,
       height: 50,
