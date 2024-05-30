@@ -111,8 +111,9 @@ Widget wContainer(BoxFit boxFit) {
 }
 
 Widget wContainer1(BoxFit boxFit) {
+  //ClipRRect裁边组件，可以切圆角
   /// 将超出子组件布局范围的绘制内容剪裁掉
-  return ClipRect(
+  return ClipRRect(
     child: Container(
       width: 50,
       height: 50,
