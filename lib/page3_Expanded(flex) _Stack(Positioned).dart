@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -88,21 +90,33 @@ class ScaffoldXX1 extends StatelessWidget {
 
                     //AspectRatio 宽高比控件（外层的只能写一个）
                     Container(
-                      color: Colors.red,
-                      width: 100,
+                      color: Colors.green,
+                      width: 100, //宽不起作用listview里面宽是最大的
                       child: const AspectRatio(
-                        aspectRatio: 1 / 0.5,
-                        child: Icon(Icons.ad_units),
+                        //根据父组件设置自己的一个大小
+                        aspectRatio: 4 / 1, //宽比高
+                        child: SizedBox(
+                          width: 100, //被AspectRatio包的宽高就不起作用了
+                          child: Center(child: Text("AspectRatio")),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 2.0),
-                    GestureDetector(
-                      onTap: () => print("==测试0=="),
+
+                    //FractionallySizedBox
+                    Center(
                       child: Container(
-                        alignment: Alignment.topLeft,
-                        color: Colors.red,
-                        width: 70,
-                        height: 50,
+                        width: 200,
+                        height: 80,
+                        color: Colors.green,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.5, //宽是父组件的0.5
+                          heightFactor: 1.1,//高是父组件的1.1，可越界父组件
+                          child: Container(
+                            color: Colors.red,
+                            child: const Text("FractionallySizedBox"),
+                          ),
+                        ),
                       ),
                     ),
                     Row(
@@ -202,7 +216,6 @@ class ScaffoldXX1 extends StatelessWidget {
                         Container(color: Colors.yellowAccent, width: 200, height: 200, child: const FlutterLogo()),
                       ],
                     ),
-
                   ],
                 ),
         );

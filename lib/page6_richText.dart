@@ -78,51 +78,9 @@ class MyRichText extends StatelessWidget {
             ],
           ),
         ),
-        Divider(),
-        Column(
-          children: [
-            wContainer(BoxFit.none),
-            Divider(),
-            Text('Wendux'),
-            Divider(),
-            wContainer(BoxFit.contain),
-            Divider(),
-            wContainer1(BoxFit.none),
-          ],
-        ),
-        Divider(),
       ],
     );
   }
 }
 
-Widget wContainer(BoxFit boxFit) {
-  return Container(
-    width: 100,
-    height: 50,
-    color: Colors.red,
-    child: FittedBox(
-      fit: boxFit,
-      // 子容器超过父容器大小,默认是受父控件影响，父多大子就是多大
-      // 加了 fittedbox 1.BoxFit.none  子多大就是多大   2.BoxFit.contain  子要全在父里面（导致缩小）
-      child: Container(width: 60, height: 70, color: Colors.blue),
-    ),
-  );
-}
 
-Widget wContainer1(BoxFit boxFit) {
-  //ClipRRect裁边组件，可以切圆角
-  /// 将超出子组件布局范围的绘制内容剪裁掉
-  return ClipRRect(
-    child: Container(
-      width: 50,
-      height: 50,
-      color: Colors.red,
-      child: FittedBox(
-        //1.BoxFit.none  子多大就是多大
-        fit: boxFit,
-        child: Container(width: 30, height: 80, color: Colors.blue),
-      ),
-    ),
-  );
-}
