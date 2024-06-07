@@ -1,5 +1,5 @@
+import 'package:get/get.dart';
+
 class SqliteState {
-  SqliteState() {
-    ///Initialize variables
-  }
+  var list=<Map<String,Object?>>[].obs;
 }

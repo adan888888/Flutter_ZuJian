@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:path/path.dart';
 import 'sqlite_logic.dart';
-import 'dart:io';
-import 'package:sqlite3/sqlite3.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SqliteView extends StatelessWidget {
   const SqliteView({super.key});
@@ -13,55 +12,75 @@ class SqliteView extends StatelessWidget {
     final logic = Get.find<SqliteLogic>();
     final state = Get.find<SqliteLogic>().state;
 
-    return Container(color: Colors.yellowAccent,);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('sqlite'),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    logic.queryAll((List<Map> list) {
+                      print('测试=》$list');
+                    });
+                  },
+                  child: Text("查询")),
+              ElevatedButton(
+                  onPressed: () {
+                    logic.add();
+                  },
+                  child: Text("增加")),
+            ],
+          ),
+          Flexible(child: Obx(() {
+            return ListView.separated(
+                itemBuilder: (context, index) {
+                  Text("${state.list}");
+                },
+                separatorBuilder: (b, index) => Divider(height: 1, color: Colors.red),
+                itemCount: state.list.length);
+          }))
+        ],
+      ),
+    );
   }
-  void sqliteTest() {
-    print('Using sqlite3 ${sqlite3.version}');
 
-    // Create a new in-memory database. To use a database backed by a file, you
-    // can replace this with sqlite3.open(yourFilePath).
-    final db = sqlite3.openInMemory();
+  testSqlite() async {
+    int count = 0;
 
-    // Create a table and insert some data
-    db.execute('''
-    CREATE TABLE artists (
-      id INTEGER NOT NULL PRIMARY KEY,
-      name TEXT NOT NULL
-    );
-  ''');
+    // var db = await openDatabase('my_db.db');
+    // Get a location using getDatabasesPath
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, 'demo.db');
 
-    // Prepare a statement to run it multiple times:
-    final stmt = db.prepare('INSERT INTO artists (name) VALUES (?)');
-    stmt
-      ..execute(['The Beatles'])
-      ..execute(['Led Zeppelin'])
-      ..execute(['The Who'])
-      ..execute(['Nirvana']);
+    // Delete the database
+    // await deleteDatabase(path);
 
-    // Dispose a statement when you don't need it anymore to clean up resources.
-    stmt.dispose();
+    Database database = await openDatabase(path, version: 1, onCreate: (Database db, int version) async {
+      // When creating the db, create the table
+      await db.execute('CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+    });
 
-    // You can run select statements with PreparedStatement.select, or directly
-    // on the database:
-    final ResultSet resultSet =
-    db.select('SELECT * FROM artists WHERE name LIKE ?', ['The %']);
+    // Insert some records in a transaction
+    await database.transaction((txn) async {
+      int id1 = await txn.rawInsert('INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)');
+      print('inserted1: $id1');
+      int id2 = await txn.rawInsert('INSERT INTO Test(name, value, num) VALUES(?, ?, ?)', ['another name', 12345678, 3.1416]);
+      print('inserted2: $id2');
+    });
 
-    // You can iterate on the result set in multiple ways to retrieve Row objects
-    // one by one.
-    for (final row in resultSet) {
-      print('Artist[id: ${row['id']}, name: ${row['name']}]');
-    }
+    count = await database.rawDelete('DELETE FROM Test WHERE name = ?', ['another name']);
+    print(count);
+    count = await database.rawDelete('DELETE FROM Test WHERE name = ?', ['some name']);
+    print(count);
 
-    // Register a custom function we can invoke from sql:
-    db.createFunction(
-      functionName: 'dart_version',
-      argumentCount: const AllowedArgumentCount(0),
-      function: (args) => Platform.version,
-    );
-    print(db.select('SELECT dart_version()'));
+    List<Map> list = await database.rawQuery('SELECT * FROM Test');
+    print(list);
 
-    // Don't forget to dispose the database to avoid memory leaks
-    db.dispose();
+    count = await database.rawUpdate('UPDATE Test SET name = ?, value = ? WHERE name = ?', ['updated name', '9876', 'some name']);
+    print('updated: $count');
   }
 }
-
