@@ -14,35 +14,23 @@ class SqliteView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('sqlite'),
+        title: const Text('sqlite'),
         centerTitle: true,
       ),
       body: Column(
         children: [
           Row(
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    logic.queryAll((List<Map> list) {
-                      print('测试=》$list');
-                    });
-                  },
-                  child: Text("查询")),
-              ElevatedButton(
-                  onPressed: () {
-                    logic.add();
-                  },
-                  child: Text("增加")),
+              ElevatedButton(onPressed: () => logic.queryAll((List<Map> list) => print('测试=》$list')), child: const Text("查询")),
+              ElevatedButton(onPressed: () => logic.add(), child: const Text("增加")),
+              ElevatedButton(onPressed: () => logic.delete(), child: const Text("删除")),
             ],
           ),
-          Flexible(child: Obx(() {
-            return ListView.separated(
-                itemBuilder: (context, index) {
-                  Text("${state.list}");
-                },
-                separatorBuilder: (b, index) => Divider(height: 1, color: Colors.red),
-                itemCount: state.list.length);
-          }))
+          Flexible(
+              child: Obx(() => ListView.separated(
+                  itemBuilder: (context, index) => Text("${state.list[index]}", style: TextStyle(fontSize: 13)),
+                  separatorBuilder: (b, index) => const Divider(height: 1, color: Colors.red),
+                  itemCount: state.list.length)))
         ],
       ),
     );

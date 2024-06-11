@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'charts_logic.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-
+//图表
 void main() {
   return runApp(_ChartApp());
 }

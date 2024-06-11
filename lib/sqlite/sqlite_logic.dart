@@ -21,13 +21,24 @@ class SqliteLogic extends GetxController {
 
   //查
   queryAll(Function(List<Map>) callback) async {
-    state.list.value = await database.rawQuery('SELECT * FROM Test');
+    var list = await database.rawQuery('SELECT * FROM Test');
+    state.list.clear();
+    state.list.addAll(list);
+    callback(list);
   }
 
   //增
   add() async {
     await database.transaction((txn) async {
       int id2 = await txn.rawInsert('INSERT INTO Test(name, value, num) VALUES(?, ?, ?)', ['another name', 12345678, 3.1416]);
+      queryAll((p0) => null);
+    });
+  }
+
+  //删
+  delete() async {
+    await database.transaction((txn) async {
+      await txn.rawDelete('DELETE FROM Test WHERE id IN ( SELECT id FROM Test ORDER BY id DESC LIMIT 1)');
       queryAll((p0) => null);
     });
   }
