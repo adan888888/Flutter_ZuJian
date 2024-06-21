@@ -14,5 +14,33 @@ void main() {
 
   print(list2);
 
-  print(8~/4);
+  print(8 ~/ 4); //相当于.toInt
+
+  print('-------------------------------List.generate--------------------------------------');
+
+  var list3 = List.generate(10, (index) => 1111).toList();
+  for (var i = 9; i >= 0; i--) {
+    list3[i] = i;
+    print('$list3');
+  }
+
+  print('-------------------------------return,continue,break--------------------------------------');
+  test();
+  print('=>');
+}
+test(){
+  var list4 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  for (var i = 0; i < list4.length; i++) {
+    // if (i == 3) {
+    //   return;//return 本方法test（）都不会往下走了
+    // }
+    // if (i == 5) {
+    //   continue; //continue结束本次运行，继续下次运行
+    // }
+    if (i == 7) {
+      break;  //break 仅退出这个for循环
+    }
+    print(list4[i]);
+  }
+  print('=>');
 }
