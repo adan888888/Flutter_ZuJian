@@ -36,6 +36,7 @@ class MyWidget extends StatelessWidget {
           const Divider(color: Colors.black87, height: 20),
           wContainer(BoxFit.contain), //1.BoxFit.contain 不能超过父类
           const Divider(color: Colors.black87, height: 20),
+          wContainerx(), //1
 
           ///5.Clip
           clipRRect_caibian(), //矩形裁剪
@@ -135,6 +136,20 @@ Widget wContainer(BoxFit boxFit) {
         // 子容器超过父容器大小,默认是受父控件影响，父多大子就是多大
         // 加了 fittedbox 1.BoxFit.none  子多大就是多大   2.BoxFit.contain  子要全在父里面（导致缩小）
         child: Container(width: 60, height: 70, color: Colors.blue),
+      ),
+    ),
+  );
+}
+
+Widget wContainerx() {
+  return Center(
+    child: Container(
+      width: 100,
+      height: 50,
+      color: Colors.red,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Container(child: Text('BoxFit.scaleDown 自体会自动缩小自体',style: TextStyle(fontSize: 13),), color: Colors.blue),
       ),
     ),
   );
