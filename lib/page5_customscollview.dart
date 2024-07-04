@@ -66,7 +66,7 @@ Widget _buildScrollablePage() {
           flexibleSpace: FlexibleSpaceBar(
             title: const Text('Demo'),
             background: Image.asset(
-              "assets/images/banner-bg.jpg",
+              "assets/images/banner_bg.jpg",
               fit: BoxFit.cover,
             ),
           ),

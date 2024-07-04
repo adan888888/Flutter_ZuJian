@@ -186,7 +186,7 @@ Widget clipOval_caibian() {
           height: 100,
           color: Colors.yellowAccent,
           child: Image.asset(
-            "assets/images/banner-bg.jpg",
+            "assets/images/banner_bg.jpg",
             fit: BoxFit.cover,
           ),
         ),
@@ -197,7 +197,7 @@ Widget clipOval_caibian() {
           height: 80,
           color: Colors.red,
           child: Image.asset(
-            "assets/images/banner-bg.jpg",
+            "assets/images/banner_bg.jpg",
             fit: BoxFit.cover,
           ),
         ),

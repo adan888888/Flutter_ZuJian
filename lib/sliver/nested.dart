@@ -48,7 +48,7 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
         //为true时展开有阴影
         flexibleSpace: FlexibleSpaceBar(
           background: Image.asset(
-            "assets/images/banner-bg.jpg",
+            "assets/images/banner_bg.jpg",
             fit: BoxFit.cover,
           ),
         ),

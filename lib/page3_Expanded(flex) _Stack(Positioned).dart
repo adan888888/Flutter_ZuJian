@@ -204,7 +204,7 @@ class ScaffoldXX1 extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Image.asset(
-                          'assets/images/banner-bg.jpg',
+                          'assets/images/banner_bg.jpg',
                           width: 60,
                           fit: BoxFit.cover,
                         )
