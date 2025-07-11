@@ -13,9 +13,14 @@ mixin  CanFly {
     print('I can fly!');
   }
 }
+mixin  CanEat {
+  void fly() {
+    print('I can fly!');
+  }
+}
 
 // 使用 mixin
-class Bird  with CanFly {
+class Bird with CanFly, CanEat { //可以混入多个
   // Bird 类现在拥有了 fly 方法
 }
 
