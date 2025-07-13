@@ -50,8 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   test() async {
-    await Future.delayed(const Duration(seconds: 2));
-    print('测试222'); //上面的延迟不会影响它下面的代码运行。
+    await Future.delayed(const Duration(seconds: 2));//加了await就会等这2秒执行完了，再执行下面的打印输出
+    print('测试222');
   }
 
   @override
