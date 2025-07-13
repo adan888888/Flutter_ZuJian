@@ -41,7 +41,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });*/
 
     //第二种写法 (只是一个语法糖，效果是一样的)
-    Future.delayed(const Duration(seconds: 2)).then((value) => setState(() => _count++));
+    await Future.delayed(const Duration(seconds: 2)).then((value) => setState(() => _count++));
+
+    print('测试111'); //上面的延迟不会影响它下面的代码运行。 上面一行代码加了await那么就会影响
+
+    await test(); //await一加就会影响后面的。
+    print('测试333');
+  }
+
+  test() async {
+    await Future.delayed(const Duration(seconds: 2));
+    print('测试222'); //上面的延迟不会影响它下面的代码运行。
   }
 
   @override
@@ -56,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () => _setCount(), child: const Icon(Icons.add)),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () => _setCount(), child: const Icon(Icons.add)),
     );
   }
 }
