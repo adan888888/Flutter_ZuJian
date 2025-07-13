@@ -11,7 +11,7 @@ class MyClass {
   // 普通构造函数（必须初始化所有 final 字段）
   const MyClass(this.value);
 
-  // 工厂构造函数（1.可以有条件地返回对象 2.可以不必，在构造里必wfn）
+  // 工厂构造函数（1.可以有条件地返回对象（可以设置任何想传的参数-(Map<String, dynamic> json)） 2.命名构造方法前面的关键字
   factory MyClass.fromJson(Map<String, dynamic> json) {
     return MyClass(json['value'] as int);
   }
