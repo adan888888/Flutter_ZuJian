@@ -8,15 +8,23 @@ main() {
 
 ///1.工厂构造函数
 class MyClass {
-  // 普通构造函数（必须初始化所有 final 字段）
+  final int value;
+
+  // 一， 普通构造函数（必须初始化所有 final 字段）
   const MyClass(this.value);
 
-  // 工厂构造函数（1.可以有条件地返回对象（可以设置任何想传的参数-(Map<String, dynamic> json)） 2.命名构造方法前面的关键字
+  // 二， 工厂构造函数
+  // 1.可以有条件地返回对象（可以设置任何想传的参数-(Map<String, dynamic> json)
+  // 2.必须要有返回值(子类实体化也可以)
   factory MyClass.fromJson(Map<String, dynamic> json) {
     return MyClass(json['value'] as int);
   }
 
-  final int value;
+  //三， Named Constructor 命名构造函数
+  MyClass.create({required this.value});
+
+  //四，重定向构造函数(Redirecting Constructors)
+  MyClass.redirect() : this(1000); //相当于调用的第一个构造函数
 }
 
 ///2.单例模式
@@ -29,7 +37,6 @@ class AppConfig {
   // 配置数据
   final String apiUrl = 'https://api.example.com';
 }
-
 
 /*
 *
