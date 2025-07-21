@@ -6,30 +6,38 @@ main() {
   final config = AppConfig(); // 每次获取的都是同一个实例
 }
 
-///1.工厂构造函数
+///1.工厂构造函数--返回一个实例对象
 class MyClass {
-  final int value;
+  int? value;
 
   // 一， 普通构造函数（必须初始化所有 final 字段）
-  const MyClass(this.value);
+   MyClass({this.value});
 
   // 二， 工厂构造函数
-  // 1.可以有条件地返回对象（可以设置任何想传的参数-(Map<String, dynamic> json)
-  // 2.必须要有返回值(子类实体化也可以)
+  // 必须要有返回值(子类实体化也可以)
   factory MyClass.fromJson(Map<String, dynamic> json) {
-    return MyClass(json['value'] as int);
+    return MyClass(value: (json['value'] as int));
   }
 
   //三， Named Constructor 命名构造函数
-  MyClass.create({required this.value});
+  MyClass.create(Map<String, dynamic> json) {
+    value = json['value'];
+  }
 
   //四，重定向构造函数(Redirecting Constructors)
-  MyClass.redirect() : this(1000); //相当于调用的第一个构造函数
+  MyClass.redirect() : this(value: 1000); //相当于调用的第一个构造函数
 }
 
-///2.单例模式
+///2.工厂构造函数--单例模式
 class AppConfig {
-  AppConfig._internal(); // 私有构造函数
+  // AppConfig._internal(); // 私有构造函数
+
+  ///还可以在私有构造的时候写方法体
+  AppConfig._internal() {
+    // 私有构造函数
+    print('AppConfig._internal');
+  }
+
   static final AppConfig _instance = AppConfig._internal();
 
   factory AppConfig() => _instance; //工厂构造必须在类的内部实例化（可以是自身的实例，也可以是子类的实例）

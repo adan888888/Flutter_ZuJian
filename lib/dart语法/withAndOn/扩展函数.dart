@@ -12,6 +12,14 @@ extension S1 on String {
   }
 }
 
+// 定义一个扩展函数，为 List 类添加一个 sum 方法，用于计算列表中所有元素的和
+extension ListExtension<T extends num> on List<T> {
+  T sum() {
+    //reduce 方法接受一个回调函数作为参数，这个回调函数有两个参数：value 和 element。
+    //value 是累积的结果，element 是列表中的当前元素。
+    return reduce((value, element) => (value + element) as T);
+  }
+}
 void main() {
   //1
   String numberString = '123x';
@@ -28,11 +36,4 @@ void main() {
   print('列表元素的和: $sum');
 }
 
-// 定义一个扩展函数，为 List 类添加一个 sum 方法，用于计算列表中所有元素的和
-extension ListExtension<T extends num> on List<T> {
-    T sum() {
-      //reduce 方法接受一个回调函数作为参数，这个回调函数有两个参数：value 和 element。
-      //value 是累积的结果，element 是列表中的当前元素。
-      return reduce((value, element) => (value + element) as T);
-    }
-}
+

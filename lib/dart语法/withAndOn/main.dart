@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+class A1 {}
+class B1 extends A1 {}
+class C1 extends B1 {}
 
 /*
 *定义了一个名为 CanFly 的 mixin，其中包含一个 fly 方法。
