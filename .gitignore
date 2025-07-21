@@ -50,3 +50,7 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+macos/Podfile.lock
+macos/Runner.xcodeproj/project.pbxproj
+macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+macos/Runner.xcworkspace/contents.xcworkspacedata
