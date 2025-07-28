@@ -53,11 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
         cacheExtent: 10,
         itemBuilder: (BuildContext context, int index) {
           print('');
-          return Center(
-            child: FittedBox(
-              child: Text(' This formatting nicer,'),
-              fit: BoxFit.none,
-            ),
+          return const Center(
+            child: Text(' This formatting nicer,'),
           );
         },
       ),

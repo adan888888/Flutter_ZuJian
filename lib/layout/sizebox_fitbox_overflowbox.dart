@@ -32,11 +32,14 @@ class MyWidget extends StatelessWidget {
           ///4.FittedBox也可以越界
           wContainer(BoxFit.none), //1.BoxFit.none  子多大就是多大
           const Divider(color: Colors.black87, height: 20),
-          const Center(child: Text('Wendux')),
+
+          const Center(child: Text('我是文字')),
           const Divider(color: Colors.black87, height: 20),
-          wContainer(BoxFit.contain), //1.BoxFit.contain 不能超过父类
+
+          wContainer(BoxFit.contain), //2.BoxFit.contain 不能超过父类
           const Divider(color: Colors.black87, height: 20),
-          wContainerx(), //1
+
+          wContainerx(), //3.会缩放（通过文字的大小看的出来）
 
           ///5.Clip
           clipRRect_caibian(), //矩形裁剪
@@ -48,7 +51,6 @@ class MyWidget extends StatelessWidget {
   }
 
   /**
-   *
    * 1.OverflowBox自身是没有尺寸的，但是SizedOverflowBox是有的
    * 2.OverflowBox跟SizedOverflowBox的父控件在有BoxConstraints约束的时候，SizedOverflowBox将约束传递给了子控件，
    * 导致子控件受到约束后无法溢出，但是OverflowBox却没有
@@ -113,13 +115,29 @@ class MyWidget extends StatelessWidget {
             width: 300,
             //超过的部分就会往Column上面，越界跑
             height: 120,
-            child: const GFCard(margin: EdgeInsets.zero, elevation: 20, color: Colors.white, title: GFListTile(titleText: "主标题1")),
+            child: const GFCard(
+                margin: EdgeInsets.zero,
+                elevation: 20,
+                color: Colors.white,
+                title: GFListTile(titleText: "主标题1")),
           ),
         ),
         const SizedBox(height: 20),
-        const GFCard(height: 115, elevation: 20, color: Colors.white, title: GFListTile(titleText: "主标题2", subTitleText: "副标题")),
-        const GFCard(height: 115, elevation: 20, color: Colors.white, title: GFListTile(titleText: "主标题3", subTitleText: "副标题")),
-        const GFCard(height: 115, elevation: 20, color: Colors.white, title: GFListTile(titleText: "主标题4", subTitleText: "副标题"))
+        const GFCard(
+            height: 115,
+            elevation: 20,
+            color: Colors.white,
+            title: GFListTile(titleText: "主标题2", subTitleText: "副标题")),
+        const GFCard(
+            height: 115,
+            elevation: 20,
+            color: Colors.white,
+            title: GFListTile(titleText: "主标题3", subTitleText: "副标题")),
+        const GFCard(
+            height: 115,
+            elevation: 20,
+            color: Colors.white,
+            title: GFListTile(titleText: "主标题4", subTitleText: "副标题"))
       ]),
     );
   }
@@ -133,9 +151,18 @@ Widget wContainer(BoxFit boxFit) {
       color: Colors.red,
       child: FittedBox(
         fit: boxFit,
-        // 子容器超过父容器大小,默认是受父控件影响，父多大子就是多大
-        // 加了 fittedbox 1.BoxFit.none  子多大就是多大   2.BoxFit.contain  子要全在父里面（导致缩小）
-        child: Container(width: 60, height: 70, color: Colors.blue),
+        // 加了 fittedbox
+        // 1.BoxFit.none  子多大就是多大(会超过父类的大小)
+        // 2.BoxFit.contain  子要全在父里面（导致缩小）
+        child: Container(
+          width: 160,
+          height: 70,
+          color: Colors.blue.withAlpha(100),
+          child: const Text(
+            '我是文本文本我是文本文本我是文本文本',
+            style: TextStyle(fontSize: 13),
+          ),
+        ),
       ),
     ),
   );
@@ -149,7 +176,12 @@ Widget wContainerx() {
       color: Colors.red,
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Container(child: Text('BoxFit.scaleDown 自体会自动缩小自体',style: TextStyle(fontSize: 13),), color: Colors.blue),
+        child: Container(
+            color: Colors.blue,
+            child: const Text(
+              'BoxFit.scaleDown 会自适应父组件缩放自己',
+              style: TextStyle(fontSize: 13),
+            )),
       ),
     ),
   );
