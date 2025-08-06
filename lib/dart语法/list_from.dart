@@ -27,6 +27,17 @@ void main() {
   print('-------------------------------return,continue,break--------------------------------------');
   test();
   print('=>');
+
+  print('------------------------------- in --------------------------------------');
+  var t=getData();
+  for (var value in t) {
+    print("到达");
+  }
+}
+
+getData() {
+  var map = {'name': 'zhangsan', 'age': 18};
+  return map;
 }
 test(){
   var list4 = [1, 2, 3, 4, 5, 6, 7, 8, 9];

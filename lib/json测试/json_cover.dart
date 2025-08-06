@@ -11,15 +11,20 @@ class ABean {
 }
 
 void main() {
+  print("----------------------------List和json互转-------------------------");
   var j = ["张三", "张三", "张三", "李四"];
   print(j is List);
   print('${j}');
-  print('${jsonEncode(j)}'); //对象list转Json
-  print("-------------------------------------------------------------------");
+  var jsonString = jsonEncode(j);//对象list转Json
+  print(jsonString);
+  var decode = jsonDecode(jsonString);
+  print(decode is List);
+  print("-------------------------------Map和json互转------------------------------------");
   var j2 = {'name': "张三", "age": "20"};
   var j3 = {'name': "张三", "age": "20"};
   print(j2);
   print(jsonEncode(j2)); //map 转成json输出
+  print(jsonDecode(jsonEncode(j2)) is Map<String,dynamic>);
   print("-------------------------------------------------------------------");
   var A = ABean.fromJson(j2);
   //print('${jsonEncode(A)}'); //出错，只有list ,map才能直接输出
