@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'dart:math' as Math;
 import 'package:flutter/material.dart';
-
+//显示动画
 void main() {
   runApp(const MyApp());
 }
 
-//显示动画
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -152,7 +152,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //动画的时候，会自动调用AnimatedBuilder
             AnimatedBuilder(
               animation: _animation, // 使用曲线动画
               builder: (context, child) {

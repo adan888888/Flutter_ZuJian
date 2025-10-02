@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-///动画AnimatedContainer的使用
+///隐式--动画AnimatedContainer的使用
 void main() {
   runApp(const MyApp());
 }
