@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 main() {
@@ -33,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _count = 0;
 
   void _setCount() async {
-    ///异常并不是多线程，跟安卓还是不一样的
+    ///异步并不是多线程，跟安卓还是不一样的
     //第一种写法
     /* await Future.delayed(const Duration(seconds: 2));
     setState(() {

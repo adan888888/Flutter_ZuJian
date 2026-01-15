@@ -44,6 +44,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/.cxx/
+/android/app/**/additional_project_files.txt
+/android/app/**/android_gradle_build.json
+/android/app/.externalNativeBuild/
 /ios/Podfile
 /macos/Podfile
 /ios/Podfile.lock
