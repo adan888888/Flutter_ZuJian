@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white24, brightness: Brightness.light),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.white24, brightness: Brightness.light),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
@@ -65,7 +66,7 @@ class _YourButtonState extends State<YourButton> {
         onPressed: () => setState(() => over = !over),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.blue),
-          shape: MaterialStateProperty.all(const StadiumBorder()),//防止点击效果是正方形
+          shape: MaterialStateProperty.all(const StadiumBorder()), //防止点击效果是正方形
         ),
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
