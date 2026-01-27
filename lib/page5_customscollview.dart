@@ -59,11 +59,33 @@ class _MyHomePageState extends State<MyHomePage> {
 Widget _buildScrollablePage() {
   return Material(
     child: CustomScrollView(
+      // ✅ 关键：Android 上需要设置 physics 才能实现下拉放大效果
+      // BouncingScrollPhysics 允许过度滚动（overscroll），iOS 默认就是这个
+      // AlwaysScrollableScrollPhysics 也可以，但 BouncingScrollPhysics 效果更自然
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          // pinned: true,
-          expandedHeight: 250.0,
+          // 吸顶（必须设为true，否则折叠后消失）
+          pinned: true,
+          // 轻微下拉就展开（放大）
+          floating: true,
+          // 轻轻拉一下AppBar迅速出来
+          snap: true,
+          // 核心：设置展开后的总高度（放大的最大高度）
+          expandedHeight: 250,
+          //允许到上面设置的250的最大高度时，想继续往下拉
+          stretch: true,
           flexibleSpace: FlexibleSpaceBar(
+            //往回缩的效果
+            collapseMode: CollapseMode.parallax, // 视差效果（图片滚动速度慢于列表，更自然）
+            // collapseMode: CollapseMode.pin, // 图片固定，仅标题栏收缩（无放大/拉伸）
+            // collapseMode: CollapseMode.none, // 图片随列表滚动同步拉伸（默认）
+            //往下拉的效果
+            stretchModes: const [
+              // StretchMode.blurBackground,
+              StretchMode.zoomBackground,
+              StretchMode.fadeTitle
+            ],
             title: const Text('Demo'),
             background: Image.asset(
               "assets/images/banner_bg.jpg",
@@ -71,6 +93,7 @@ Widget _buildScrollablePage() {
             ),
           ),
         ),
+        //slivers:里面不能直接放widget，需要使用SliverToBoxAdapter包裹起来
         SliverToBoxAdapter(
             child: Container(
                 alignment: Alignment.topLeft,
@@ -89,7 +112,7 @@ Widget _buildScrollablePage() {
               childAspectRatio: 4.0,
             ),
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) => Container(
+                  (BuildContext context, int index) => Container(
                 alignment: Alignment.center,
                 color: Colors.cyan[100 * (index % 9)],
                 child: Text('grid item $index'),
@@ -110,7 +133,7 @@ Widget _buildScrollablePage() {
           //相当于Listview+高度
           itemExtent: 50.0, //每个item高度
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+                (BuildContext context, int index) {
               return Container(
                 alignment: Alignment.center,
                 color: Color(Random().nextInt(0xffffff)).withOpacity(0.5),
