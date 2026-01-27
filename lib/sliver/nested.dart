@@ -18,11 +18,13 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
       body: DefaultTabController(
         length: _tabs.length,
         child: NestedScrollView(
+          //TabBar和头部
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               _buildHeader(context, innerBoxIsScrolled),
             ];
           },
+          //TabBar以下的内容
           body: _buildTabBarView(),
         ),
       ),
@@ -40,12 +42,13 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
           // 它可以随着滚动而滑动或固定在屏幕顶部，并且可以与其他 Sliver 小部件一起使用。
           SliverAppBar(
         title: const Text('滚动一致性'),
+        //是否吸顶
         pinned: true,
-        elevation: 6,
         //影深
+        elevation: 6,
         expandedHeight: 300.0,
-        forceElevated: innerBoxIsScrolled,
         //为true时展开有阴影
+        forceElevated: innerBoxIsScrolled,
         flexibleSpace: FlexibleSpaceBar(
           background: Image.asset(
             "assets/images/banner_bg.jpg",
@@ -59,7 +62,7 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
             children: [
               Container(
                 color: Colors.greenAccent,
-                child: const Center(child: Text('固定高度内容')),
+                child: const Center(child: Text('固定高度内容1')),
               ),
               TabBar(
                 tabs: _tabs
@@ -86,11 +89,8 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
               return CustomScrollView(
                 key: PageStorageKey<String>(name),
                 slivers: <Widget>[
-                  // SliverOverlapInjector 的作用是处理重叠滚动效果，
                   // 确保 CustomScrollView 中的滚动视图不会与其他视图重叠。
-                  SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  ),
+                  SliverOverlapInjector(handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
 
                   // 横向滚动
                   SliverToBoxAdapter(
@@ -109,24 +109,22 @@ class _NestedScrollPageState extends State<NestedScrollPage> {
                     ),
                   ),
 
-                  // 固定高度内容
                   SliverToBoxAdapter(
                     child: Container(
                       height: 100,
                       color: Colors.greenAccent,
-                      child: const Center(child: Text('固定高度内容')),
+                      child: const Center(child: Text('固定高度内容2')),
                     ),
                   ),
 
                   // 列表
                   buildContent(name),
 
-                  // 固定高度内容
                   SliverToBoxAdapter(
                     child: Container(
                       height: 100,
                       color: Colors.greenAccent,
-                      child: const Center(child: Text('固定高度内容')),
+                      child: const Center(child: Text('固定高度内容3')),
                     ),
                   ),
 

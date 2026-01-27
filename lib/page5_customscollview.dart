@@ -112,7 +112,7 @@ Widget _buildScrollablePage() {
               childAspectRatio: 4.0,
             ),
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) => Container(
+              (BuildContext context, int index) => Container(
                 alignment: Alignment.center,
                 color: Colors.cyan[100 * (index % 9)],
                 child: Text('grid item $index'),
@@ -122,18 +122,19 @@ Widget _buildScrollablePage() {
           ),
         ),
         SliverToBoxAdapter(
-            child: Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                height: 50,
-                color: Colors.amber.withOpacity(0.5),
-                child: Text('Listview 标题SliverToBoxAdapter'))),
+          child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: 50,
+              color: Colors.amber.withOpacity(0.5),
+              child: Text('Listview 标题SliverToBoxAdapter')),
+        ),
 
         SliverFixedExtentList(
           //相当于Listview+高度
           itemExtent: 50.0, //每个item高度
           delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+            (BuildContext context, int index) {
               return Container(
                 alignment: Alignment.center,
                 color: Color(Random().nextInt(0xffffff)).withOpacity(0.5),

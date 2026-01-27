@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const MyPageView(),
-      // home: const NestedScrollPage(),
+      // home: const MyPageView(),
+      home: const NestedScrollPage(),
     );
   }
 }

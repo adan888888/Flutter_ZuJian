@@ -9,8 +9,7 @@ class MyPageView extends StatefulWidget {
   State<MyPageView> createState() => _MyPageViewState();
 }
 
-class _MyPageViewState extends State<MyPageView>
-    with SingleTickerProviderStateMixin {
+class _MyPageViewState extends State<MyPageView> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -25,15 +24,13 @@ class _MyPageViewState extends State<MyPageView>
     super.dispose();
   }
 
-  Widget _buildPersistentHeader(Widget child,
-          {double? minHeight, double? maxHeight}) =>
-      SliverPersistentHeader(
-          pinned: true,
-          delegate: _SliverDelegate(
-            minHeight: minHeight ?? 40.0,
-            maxHeight: maxHeight ?? 40.0,
-            child: child,
-          ));
+  Widget _buildPersistentHeader(Widget child, {double? minHeight, double? maxHeight}) => SliverPersistentHeader(
+      pinned: true,
+      delegate: _SliverDelegate(
+        minHeight: minHeight ?? 40.0,
+        maxHeight: maxHeight ?? 40.0,
+        child: child,
+      ));
 
   Widget _mainView() {
     return CustomScrollView(
@@ -60,7 +57,7 @@ class _MyPageViewState extends State<MyPageView>
           child: Container(
             height: 200,
             color: Colors.greenAccent,
-            child: const Center(child: Text('固定高度内容')),
+            child: const Center(child: Text('固定高度内容1')),
           ),
         ),
 
@@ -92,7 +89,7 @@ class _MyPageViewState extends State<MyPageView>
           ),
         ),
 
-        // TabBar 固定
+        // TabBar 固定（只有tabbar）
         _buildPersistentHeader(TabBar(
           controller: _tabController,
           tabs: const [
@@ -107,11 +104,11 @@ class _MyPageViewState extends State<MyPageView>
           child: Container(
             height: 100,
             color: Colors.greenAccent,
-            child: const Center(child: Text('固定高度内容')),
+            child: const Center(child: Text('固定高度内容2')),
           ),
         ),
 
-        // 子 TabBar 固定
+        // 子 TabBar 固定（只有tabbar）
         _buildPersistentHeader(TabBar(
           controller: _tabController,
           tabs: const [
@@ -121,7 +118,7 @@ class _MyPageViewState extends State<MyPageView>
           ],
         )),
 
-        // TabBarView 自适应高度
+        // TabView内容 （自适应高度）
         SliverFillRemaining(
           child: TabBarView(
             controller: _tabController,
@@ -156,7 +153,7 @@ class _MyPageViewState extends State<MyPageView>
           child: Container(
             height: 200,
             color: Colors.greenAccent,
-            child: const Center(child: Text('固定高度内容')),
+            child: const Center(child: Text('固定高度内容3')),
           ),
         ),
 
@@ -200,15 +197,12 @@ class _SliverDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => max(maxHeight, minHeight);
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return SizedBox.expand(child: child);
   }
 
   @override //是否需要重建
   bool shouldRebuild(_SliverDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+    return maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || child != oldDelegate.child;
   }
 }
